@@ -74,7 +74,7 @@
         </javaClientGenerator>
 
         <!-- 要生成哪些表-->
-        <table tableName="all_msg" domainObjectName="allMsg">
+        <table tableName="all_msg" domainObjectName="AllMsg">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 

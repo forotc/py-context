@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>simple数据</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="input-group">
+      <span class="input-group-btn">
+        <button id="go" class="btn btn-default" type="button">获取所有抓取数据!</button>
+      </span>
+            <!--<input type="text" class="form-control" placeholder="Search for...">-->
+        </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+</div>
+
+<table id="tb" class="table">
+    <caption>数据展示.</caption>
+    <thead id="th">
+    <tr>
+        <th>type</th>
+        <th>时间</th>
+        <th>数据内容</th>
+        <th>数据时长</th>
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+
+<script>
+
+    jQuery(function ($) {
+
+        $("#go").click(function () {
+
+            $.ajax({
+                type: "get",
+                url: "/query/all",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    var text = "";
+                    // var json = JSON.parse(data);
+                    $.each(data, function (index, obj) {
+                        $("#tbody").children().remove();
+                        var td1 = "<tr>";
+                        var td2 = "<th scope=\"row\">" + obj.type + "</th>";
+                        var td3 = "<td>" + obj.ctime + "</td>";
+                        var td4 = "<td>" + obj.content + "</td>";
+                        var td5 = "<td>" + obj.duration + "</td>";
+                        var td6 = "</tr>";
+                        text += td1 + td2 + td3 + td4 + td5 + td6;
+                    })
+                    $("#tbody").html(text);
+                }
+
+            })
+
+
+        })
+
+
+    })
+
+
+</script>
+
+</html>
